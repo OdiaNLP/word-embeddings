@@ -1,0 +1,19 @@
+<form method=post action="">
+    <h2>Obtain similar words and plot embeddings</h2>
+    <p>Enter a list of Odia words separated by comma ',' and then click on submit button.</p>
+    <table>
+        {% for field in form %}
+            <tr>
+                <td>{{ field.label }}</td>
+                <td>{{ field }}</td>
+            </tr>
+        {% endfor %}
+    </table>
+    <p><input type=submit value=Submit></form></p>
+
+<p>
+    {% if result != None %}
+        <p style="color:red;"> {{ result.message }} </p>
+        <img src="{{ result.image_path }}"; width=50%; height=auto>
+    {% endif %}
+</p>
