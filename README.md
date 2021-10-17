@@ -31,5 +31,4 @@ python controller.py  # open http://127.0.0.1:31137/word2vec in browser
 ## Snapshot of web app
 <img src="/snapshot.png" width="50%" height="50%"/>
 
-
 [LICENSE](https://github.com/OdiaNLP/word-embeddings/blob/main/LICENSE)
