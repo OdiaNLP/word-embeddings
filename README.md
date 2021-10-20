@@ -1,6 +1,6 @@
 # Odia Word Embeddings
 
-Odia word embeddings trained using word2vec
+Train Odia word embeddings using word2vec.
 
 ## Dependencies
 See the dependencies in `requirements.txt`.
