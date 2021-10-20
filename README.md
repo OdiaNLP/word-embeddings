@@ -7,7 +7,7 @@ See the dependencies in `requirements.txt`.
 The code has been tested with Python 3.6.
 
 ## Overview
-We train word embeddings using the word2vec.
+
 Check out [this blog post](https://jalammar.github.io/illustrated-word2vec/) to get an illustrated guide to word2vec.
 
 - First download Odia text data.
