@@ -8,8 +8,14 @@ from matplotlib import font_manager as fm
 from sklearn.manifold import TSNE
 
 
-def plot_embs(model: KeyedVectors, base_words: List[str], num_neighbours: int, title: str,
-              random_seed: int, save_path: str) -> str:
+def plot_embs(
+    model: KeyedVectors,
+    base_words: List[str],
+    num_neighbours: int,
+    title: str,
+    random_seed: int,
+    save_path: str,
+) -> str:
     """Plot embeddings for a set of words and their neighbours.
     First obtain the neighbours. Then apply tSNE. Finally plot."""
 
@@ -27,17 +33,25 @@ def plot_embs(model: KeyedVectors, base_words: List[str], num_neighbours: int, t
     embs = np.stack(embs)
 
     # tSNE
-    tsne_tokens_embedded = TSNE(n_components=2, metric='cosine', verbose=True,
-                                random_state=random_seed).fit_transform(embs)
+    tsne_tokens_embedded = TSNE(
+        n_components=2, metric="cosine", verbose=True, random_state=random_seed
+    ).fit_transform(embs)
     x_tsne, y_tsne = zip(*tsne_tokens_embedded)
 
     # display scatter plot
     fig, ax = plt.subplots(figsize=(10, 8), dpi=160)
     for k, (label, is_base, x, y) in enumerate(zip(all_viz_words, is_base_word, x_tsne, y_tsne)):
         alpha = 1.0 if is_base else 0.2
-        ax.scatter([x], [y], color='xkcd:blue', alpha=alpha)
-        ax.text(x, y, label, color='xkcd:orangered', va='bottom', fontsize=12,
-                fontproperties=get_odia_prop(os.path.join('fonts/OR51_Ananta.ttf')))
+        ax.scatter([x], [y], color="xkcd:blue", alpha=alpha)
+        ax.text(
+            x,
+            y,
+            label,
+            color="xkcd:orangered",
+            va="bottom",
+            fontsize=12,
+            fontproperties=get_odia_prop(os.path.join("./src/font/OR51_Ananta.ttf")),
+        )
     ax.set_title(title, fontsize=18)
     plt.tight_layout()
     plt.savefig(save_path)
@@ -57,12 +71,12 @@ def get_odia_prop(font_path: str):
 
 
 if __name__ == "__main__":
-    _model = KeyedVectors.load_word2vec_format(os.path.join('embeddings.txt'))
+    _model = KeyedVectors.load_word2vec_format(os.path.join("model/embeddings.txt"))
     _ = plot_embs(
         model=_model,
-        base_words=['ଘୋଡା', 'ହାତୀ', 'ବାଘ', 'ଟିଭି', 'କଲମ', 'କାନ୍ଥ'],
+        base_words=["ଘୋଡା", "ହାତୀ", "ବାଘ", "ଟିଭି", "କଲମ", "କାନ୍ଥ"],
         num_neighbours=5,
-        title='Word embeddings',
+        title="Word embeddings",
         random_seed=123,
-        save_path=os.path.join('example.png'),
+        save_path=os.path.join("../docs/example.png"),
     )
