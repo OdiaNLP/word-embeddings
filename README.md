@@ -25,6 +25,7 @@ head or
 
 ### Web App Local Conda setup
 - Clone the repo
+- Put the `embeddings.txt` you have trained inside `src/model/` directory.
 - Create a virtual environment. If installed Anaconda, you can try:
     ```shell
     $ conda create -n word_embeddings python=3.6
