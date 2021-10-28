@@ -7,6 +7,7 @@ from gensim.models import KeyedVectors
 from src.common.log import WE_LOGGER
 from src.controller import process_word2vec
 
+os.environ["PYTHONIOENCODING"] = "utf-8"
 app = Flask(__name__)
 os.makedirs("response", exist_ok=True)
 responses_path = os.path.join("response", "word2vec_logs.txt")

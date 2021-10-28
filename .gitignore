@@ -142,7 +142,7 @@ cython_debug/
 **/.idea
 
 /src/model/embeddings.txt
-/src/static/
+/static/
 /response/
 /data/
 .idea/
