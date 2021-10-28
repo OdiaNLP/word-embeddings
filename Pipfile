@@ -4,15 +4,16 @@ verify_ssl = true
 name = "pypi"
 
 [packages]
+Flask = "==1.1.2"
 gensim = "==3.8.3"
+gunicorn= "==20.1.0"
 matplotlib = "==3.2.1"
 numpy = "==1.19.4"
 rich = "==10.12.0"
-scikit-learn = "==1.0"
-Flask = "==1.1.2"
+scikit-learn = "*"
 WTForms = "==2.3.3"
 
 [dev-packages]
 
 [requires]
-python_version = "3.7"
+python_version = "3.6"

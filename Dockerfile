@@ -1,5 +1,5 @@
 # https://sourcery.ai/blog/python-docker/
-FROM python:3.7-slim as base
+FROM python:3.6-slim as base
 
 # Setup env
 ENV LANG C.UTF-8
@@ -31,13 +31,14 @@ FROM base AS runtime
 COPY --from=python-deps /.venv /.venv
 ENV PATH="/.venv/bin:$PATH"
 
+EXPOSE 31137
+
 # Create and switch to a new user
-#RUN useradd --create-home appuser
-#WORKDIR /home/appuser
-#USER appuser
-#COPY . .
+RUN useradd --create-home appuser
+WORKDIR /home/appuser
+COPY . .
+RUN chmod -R 777 ./
+USER appuser
 
 # Run the application:
-RUN echo ls -ltr
-RUN echo pwd
-CMD ["python", "/.venv/main.py"]
+CMD ["gunicorn", "app:app", "-b", "0.0.0.0:31137"]
