@@ -6,6 +6,11 @@ logging.basicConfig(
     level="INFO",
     format=FORMAT,
     datefmt="%d-%b-%y %H:%M:%S",
-    handlers=[RichHandler(rich_tracebacks=True, tracebacks_show_locals=True)],
+    handlers=[
+        RichHandler(
+            rich_tracebacks=True,
+            tracebacks_show_locals=True,
+        )
+    ],
 )
 WE_LOGGER = logging.getLogger(__name__)

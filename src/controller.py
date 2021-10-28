@@ -2,42 +2,14 @@ import os
 from datetime import datetime
 from time import time
 
-from flask import Flask, render_template, request
-from gensim.models import KeyedVectors
+from flask import render_template, request
 
-import src
-from src.form_model import InputFormWord2Vec
 from src.common.log import WE_LOGGER
+from src.form_model import InputFormWord2Vec
 from src.utils import plot_embs, plot_dummy
 
-# create app
-app = Flask(__name__, template_folder="src/templates", static_folder="static", static_url_path="")
 
-# set url postfix
-rule = "/word2vec"
-
-template_name = "my_view"
-
-# create responses dir
-os.makedirs("response", exist_ok=True)
-
-# create plots dir
-plots_dir = "static"
-os.makedirs(plots_dir, exist_ok=True)
-
-# specify responses file path
-responses_path = os.path.join("response", "word2vec_logs.txt")
-
-if responses_path is not None:
-    with open(responses_path, "a", encoding="utf-8") as f:
-        WE_LOGGER.info(f"\nstarting app..[{datetime.now().strftime('%m/%d/%Y %H:%M:%S')}]\n")
-        f.write(f"\nstarting app..[{datetime.now().strftime('%m/%d/%Y %H:%M:%S')}]\n")
-
-model = KeyedVectors.load_word2vec_format(os.path.join("./src/model/embeddings.txt"))
-
-
-@app.route(rule=rule, methods=["GET", "POST"])
-def index():
+def process_word2vec(plots_dir, responses_path, model):
     form = InputFormWord2Vec(request.form)
     if request.method == "POST" and form.validate():
         words = [word.strip() for word in form.words.data.split(",")]
@@ -79,5 +51,4 @@ def index():
             )
             fr.write(final_message)
             # WE_LOGGER(f"final_message: {final_message}")
-
-    return render_template(template_name + ".html", form=form, result=result)
+    return render_template("my_view.html", form=form, result=result)
