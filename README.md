@@ -63,6 +63,6 @@ head or
     ```
 
 ## Snapshot of web app
-<img src="/docs/snapshot.png" width="75%" height="75%"/>
+<img src="/docs/color_capture.png" width="75%" height="75%"/>
 
 [LICENSE](https://github.com/OdiaNLP/word-embeddings/blob/main/LICENSE)
