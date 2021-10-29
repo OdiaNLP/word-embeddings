@@ -1,4 +1,5 @@
 import os
+from itertools import cycle
 from typing import List
 
 import matplotlib.pyplot as plt
@@ -6,6 +7,8 @@ import numpy as np
 from gensim.models import KeyedVectors
 from matplotlib import font_manager as fm
 from sklearn.manifold import TSNE
+
+from src.common.log import WE_LOGGER
 
 
 def plot_embs(
@@ -40,16 +43,32 @@ def plot_embs(
 
     # display scatter plot
     fig, ax = plt.subplots(figsize=(10, 8), dpi=160)
+    color_cycle = cycle(
+        [
+            "xkcd:orange",
+            "xkcd:pink",
+            "xkcd:blue",
+            "xkcd:brown",
+            "xkcd:red",
+            "xkcd:grey",
+            "xkcd:yellow",
+            "xkcd:green",
+        ]
+    )
     for k, (label, is_base, x, y) in enumerate(zip(all_viz_words, is_base_word, x_tsne, y_tsne)):
+        WE_LOGGER.info(f"{k}, ({label}, {is_base}, {x}, {y}")
+        if is_base:
+            new_color = next(color_cycle)
+        scatter_plot_color = new_color
         alpha = 1.0 if is_base else 0.2
-        ax.scatter([x], [y], color="xkcd:blue", alpha=alpha)
+        ax.scatter([x], [y], color="xkcd:black", alpha=alpha)
         ax.text(
             x,
             y,
             label,
-            color="xkcd:orangered",
+            color=scatter_plot_color,
             va="bottom",
-            fontsize=12,
+            fontsize=14,
             fontproperties=get_odia_prop(os.path.join("./src/font/OR51_Ananta.ttf")),
         )
     ax.set_title(title, fontsize=18)
