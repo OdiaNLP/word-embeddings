@@ -21,7 +21,7 @@ head or
 ```
 ## Setup
 ### Train
-- To train word embeddings, see the notebook `word2vec.ipynb`.
+- To train word embeddings, see the notebook [word2vec.ipynb](./docs/word2vec.ipynb).
 
 ### Web App Local Conda setup
 - Clone the repo
